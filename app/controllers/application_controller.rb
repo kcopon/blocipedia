@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  def landing
-    render test: "Welcome to Blocipedia! Gimme teh monies!"
+  def hello
+    render text: "Welcome to Blocipedia! Gimme teh monies!"
   end
 end
