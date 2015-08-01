@@ -15,21 +15,21 @@ admin = User.new(
  admin.skip_confirmation!
  admin.save!
  
- # Create a moderator
-moderator = User.new(
-  name:     'Moderator User',
-  email:    'moderator@example.com',
+ # Create a premium user
+premium = User.new(
+  name:     'Premium User',
+  email:    'premium@example.com',
   password: 'helloworld',
-  role:     'moderator'
+  role:     'premium'
 )
-moderator.skip_confirmation!
-moderator.save!
+premium.skip_confirmation!
+premium.save!
  
- # Create a member
-member = User.new(
-  name:     'Member User',
-  email:    'member@example.com',
+ # Create a standard user
+standard = User.new(
+  name:     'Standard User',
+  email:    'standard@example.com',
   password: 'helloworld'
 )
-member.skip_confirmation!
-member.save!
+standard.skip_confirmation!
+standard.save!
