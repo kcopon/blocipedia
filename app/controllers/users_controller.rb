@@ -16,4 +16,11 @@ class UsersController < ApplicationController
    def user_params
      params.require(:user).permit(:name)
    end
- end
+
+  def destroy
+    customer = Stripe::Customer.retrieve(current_user.stripe_id)
+    customer.subscriptions.retrieve(customer.subscriptions.first.id).delete
+    redirect_to wikis_path
+    current_user.update_attributes(stripe_id: nil, role: "member")
+  end
+end
