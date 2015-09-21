@@ -4,18 +4,28 @@
 <div class="col-md-8", align="center">
   <div class="jumbotron", align="center">
     <h1>Blocipedia: Social, Markdown Wikis</h1>
-    <p>
-      <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary' %> today!
-    </p>
   </div>
 
   <div class="row">
     <div class="col-md-6", align="center">
       <h2>Create as many public 
         <p>wikis as you want!</p></h2>
+        <p>
+        <%= link_to "Free Plan", new_user_registration_path, class: 'btn btn-primary' %> 
+        </p>
     </div> 
     <div class="col-md-6", align="center">
       <h2>Create private wikis!</h2>
+      <form action="" method="POST">
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key= ENV['STRIPE_PUBLISHABLE_KEY'] 
+        data-amount="1500"
+        data-name="Premium Membership"
+        data-description="1 Month ($15.00)"
+        data-image="/128x128.png">
+      </script>
+      </form>
     </div>
   </div>
 </div>

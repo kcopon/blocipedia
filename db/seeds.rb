@@ -33,3 +33,11 @@ standard = User.new(
 )
 standard.skip_confirmation!
 standard.save!
+
+#Create Wikis
+5.times do 
+  wiki = create.wiki!(
+    title: Faker::Lorem.sentence,
+    body: Faker::Lorem.paragraph
+)
+end
