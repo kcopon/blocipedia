@@ -12,8 +12,22 @@
   <ul class="nav nav-tabs">
     <div class ="container">
       <div class="pull-left user-info">
-        <%= "user is signed in" if current_user %>
+        <%= link_to "Upgrade Account" if current_user %>
       </div>
+      <script src="https://checkout.stripe.com/checkout.js"></script>
+
+<button id="customButton"><script
+        src="https://checkout.stripe.com/checkout.js"
+        data-key= "<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
+        data-amount="1500"
+        data-name="Premium Membership"
+        data-description="1 Month ($15.00)"
+        data-image="/128x128.png"
+        data-locale="auto">
+      </script>Upgrade Account</button>
+
+
+
       <div class="pull-right user-info">
         <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary' %>
         <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
