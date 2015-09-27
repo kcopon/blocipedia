@@ -55,6 +55,10 @@ group :development, :test do
   gem 'faker'
   gem 'pundit'
   gem 'stripe'
+
+  gem 'redcarpet'
+  gem 'albino'
+  gem 'nokogiri'
   
 end
 

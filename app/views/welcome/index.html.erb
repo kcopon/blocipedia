@@ -19,7 +19,7 @@
       <form action="" method="POST">
       <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key= ENV["STRIPE_PUBLISHABLE_KEY"]
+        data-key= "<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
         data-amount="1500"
         data-name="Premium Membership"
         data-description="1 Month ($15.00)"
