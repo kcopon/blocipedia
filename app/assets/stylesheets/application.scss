@@ -28,3 +28,7 @@
 .centered {
   @include center-block();
 }
+
+#theBtn {
+  color: red;
+}

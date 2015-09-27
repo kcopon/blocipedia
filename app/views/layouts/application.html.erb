@@ -6,26 +6,23 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script type="text/javascript" src="https://checkout.stripe.com/checkout.js"></script>
 </head>
 
 <body>
   <ul class="nav nav-tabs">
     <div class ="container">
       <div class="pull-left user-info">
-        <%= link_to "Upgrade Account" if current_user %>
+        <% if current_user %>
+        <button class="btn btn-link" id="stripeUpgrade"
+          data-key=<%= @stripe_btn_data[:key]%>
+          data-amount=<%= @stripe_btn_data[:amount]%>
+          data-description=<%= @stripe_btn_data[:description]%>
+          >Upgrade Account </button>
+        <% end %>
       </div>
-      <script src="https://checkout.stripe.com/checkout.js"></script>
 
-<button id="customButton"><script
-        src="https://checkout.stripe.com/checkout.js"
-        data-key= "<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
-        data-amount="1500"
-        data-name="Premium Membership"
-        data-description="1 Month ($15.00)"
-        data-image="/128x128.png"
-        data-locale="auto">
-      </script>Upgrade Account</button>
-
+      
 
 
       <div class="pull-right user-info">
@@ -53,6 +50,23 @@
        <% end %>
 
 <%= yield %>
+<script type="text/javascript">
+  $(document).ready(function(){
+      $('#stripeUpgrade').on('click', function(e){
+        e.preventDefault();
+
+        var $button = $(this),
+        $form = $button.parents('form');
+
+        var opts = $.extend({}, $button.data(), {
+          token: function(res){
+            $form.append($('#stripeUpgrade').attr({type: 'hidden', name: 'stripeToken', value: res.id})).submit();
+          }
+        });
+        StripeCheckout.open(opts);
+      });
+  });
+  </script>
 
 </body>
 </html>
