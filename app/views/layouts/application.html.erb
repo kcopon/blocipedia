@@ -18,32 +18,16 @@
 
 <button id="customButton">Upgrade Account</button>
 
-<script>
-  var handler = StripeCheckout.configure({
-    key: 'pk_test_wJChneQu3AcgnH8SdhZTtNqR',
-    image: '/img/documentation/checkout/marketplace.png',
-    locale: 'auto',
-    token: function(token) {
-      // Use the token to create the charge with a server-side script.
-      // You can access the token ID with `token.id`
-    }
-  });
+<script
+        src="https://checkout.stripe.com/checkout.js"
+        data-key= "<%= ENV["STRIPE_PUBLISHABLE_KEY"] %>"
+        data-amount="1500"
+        data-name="Premium Membership"
+        data-description="1 Month ($15.00)"
+        data-image="/128x128.png"
+        data-locale="auto">
+      </script>
 
-  $('#customButton').on('click', function(e) {
-    // Open Checkout with further options
-    handler.open({
-      name: 'Blocipedia Premium Account',
-      description: 'Awesomeness awaits!',
-      amount: 1500
-    });
-    e.preventDefault();
-  });
-
-  // Close Checkout on page navigation
-  $(window).on('popstate', function() {
-    handler.close();
-  });
-</script>
       <div class="pull-right user-info">
         <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary' %>
         <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
