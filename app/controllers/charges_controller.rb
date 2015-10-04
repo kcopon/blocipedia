@@ -16,7 +16,7 @@ class ChargesController < ApplicationController
       currency: 'usd'
     )
     
-    current_user.update_attributes(stripe_id: customer.id, role: "premium")
+    current_user.update_attributes!(stripe_id: customer.id, role: "premium")
     flash[:success] = "Thanks for all the money, #{current_user.email}! Feel free to pay me again."
     redirect_to wikis_path # or wherever
    
@@ -38,5 +38,14 @@ class ChargesController < ApplicationController
 
   def amount
     15_00
+  end
+
+  def downgrade
+    if current_user.update_attributes(role: "standard", stripe_id: nil)
+      flash[:notice] = "Account downgraded"
+    else
+      flash[:error] = "Something went wrong"
+    end
+    redirect_to wikis_path 
   end
 end

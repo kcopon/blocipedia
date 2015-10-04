@@ -14,11 +14,18 @@
     <div class ="container">
       <div class="pull-left user-info">
         <% if current_user %>
-        <button class="btn btn-link" id="stripeUpgrade"
-          data-key=<%= @stripe_btn_data[:key]%>
-          data-amount=<%= @stripe_btn_data[:amount]%>
-          data-description=<%= @stripe_btn_data[:description]%>
-          >Upgrade Account </button>
+          <ul class="nav nav-tabs"> 
+          <li><button class="btn btn-link"><%= link_to "Public Wikis", wikis_path %></button></li>
+          <li><button class="btn btn-link"><%= link_to "Private Wikis", root_path %></button></li>
+          <% if current_user.role == "premium" %>
+            <li><%= link_to "Downgrade", charges_downgrade_path, method: :put %></li> 
+          <% else %>
+          <li><button class="btn btn-link" id="stripeUpgrade"
+            data-key=<%= @stripe_btn_data[:key]%>
+            data-amount=<%= @stripe_btn_data[:amount]%>
+            data-description=<%= @stripe_btn_data[:description]%>
+            >Upgrade Account </button></li>
+          <% end %>
         <% end %>
       </div>
 
