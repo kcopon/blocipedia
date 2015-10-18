@@ -5,4 +5,7 @@ class Wiki < ActiveRecord::Base
   scope :publicly_viewable, -> { where(public: true) }
   scope :privately_viewable, -> { where(public: false) }
 
+  def private?
+    private
+  end
 end

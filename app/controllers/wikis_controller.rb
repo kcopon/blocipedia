@@ -2,8 +2,7 @@ class WikisController < ApplicationController
   #before_filter :check_premium_logged_in!, :except => 
 
   def index
-    @wikis = Wiki.all
-    authorize @wikis
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -17,7 +16,7 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(params.require(:wiki).permit(:title, :body))
+    @wiki = Wiki.new(params.require(:wiki).permit(:title, :body, :private))
     if @wiki.save
       flash[:notice] = "Wiki was saved!"
       redirect_to @wiki
