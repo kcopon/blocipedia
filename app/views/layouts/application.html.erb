@@ -21,8 +21,12 @@
       </div>
 
       <div class="pull-right user-info">
+        User: <%= current_user %>
+        <% if current_user %>
+        <%= link_to "Sign out", destroy_user_session_path, class: 'btn btn-primary', method: :delete %>
+        <% else %>
         <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary' %>
-        <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+        <% end %>
       </div>
     </div>
   </ul>

@@ -1,5 +1,5 @@
 class WikisController < ApplicationController
-  before_filter :check_premium_logged_in!#, :except => 
+  #before_filter :check_premium_logged_in!, :except => 
 
   def index
     @wikis = Wiki.all
@@ -35,7 +35,7 @@ class WikisController < ApplicationController
   def update 
     @wiki = Wiki.find(params[:id])
     authorize @wiki
-    if @wiki.update_attributes(params.require(:wiki).permit(:title, :body))
+    if @wiki.update_attributes(params.require(:wiki).permit(:title, :body, :private))
       flash[:notice] = "Update successful!"
       redirect_to @wiki
     else
