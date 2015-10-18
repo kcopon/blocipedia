@@ -1,4 +1,6 @@
 class WikisController < ApplicationController
+  before_filter :check_premium_logged_in!#, :except => 
+
   def index
     @wikis = Wiki.all
     authorize @wikis
@@ -6,10 +8,12 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    #authorize @wiki
   end
 
   def new
     @wiki = Wiki.new
+    #authorize @wiki
   end
 
   def create
@@ -51,5 +55,10 @@ class WikisController < ApplicationController
       flash[:error] = "There was an error deleting this wiki"
       render :show
     end 
-  end  
+  end
+
+  def check_premium_acct
+    authenticate_premium!
+  end
+
 end
