@@ -15,22 +15,10 @@
       <div class="pull-left user-info">
         <% if current_user %>
           <ul class="nav nav-tabs"> 
-          <li><button class="btn btn-link"><%= link_to "Public Wikis", wikis_path %></button></li>
-          <li><button class="btn btn-link"><%= link_to "Private Wikis", root_path %></button></li>
-          <% if current_user.role == "premium" %>
-            <li><%= link_to "Downgrade", charges_downgrade_path, method: :put %></li> 
-          <% else %>
-          <li><button class="btn btn-link" id="stripeUpgrade"
-            data-key=<%= @stripe_btn_data[:key]%>
-            data-amount=<%= @stripe_btn_data[:amount]%>
-            data-description=<%= @stripe_btn_data[:description]%>
-            >Upgrade Account </button></li>
-          <% end %>
+          <li><button class="btn btn-link"><%= link_to "Wikis", wikis_path %></button></li>
+          <li><button class="btn btn-link"><%= link_to "Settings", edit_user_registration_path %></button></li>
         <% end %>
       </div>
-
-      
-
 
       <div class="pull-right user-info">
         <%= link_to "Sign In", new_user_session_path, class: 'btn btn-primary' %>
@@ -57,23 +45,6 @@
        <% end %>
 
 <%= yield %>
-<script type="text/javascript">
-  $(document).ready(function(){
-      $('#stripeUpgrade').on('click', function(e){
-        e.preventDefault();
-
-        var $button = $(this),
-        $form = $button.parents('form');
-
-        var opts = $.extend({}, $button.data(), {
-          token: function(res){
-            $form.append($('#stripeUpgrade').attr({type: 'hidden', name: 'stripeToken', value: res.id})).submit();
-          }
-        });
-        StripeCheckout.open(opts);
-      });
-  });
-  </script>
 
 </body>
 </html>
