@@ -18,3 +18,18 @@
     <%= f.submit "Save", class: 'btn btn-success' %>
   </div>
 <% end %>
+
+<% if !wiki.id.nil? && wiki.user == current_user && current_user.role == 'premium' %>
+  <%= form_for [wiki, Collaboration.new] do |f| %>
+    <div class="form-group">
+      <%= label_tag :email %>
+      <%= text_field_tag :email, nil, placeholder: "Enter User email" %> 
+      <%= f.submit %>
+    </div>
+  <% end %>
+<% end %>
+
+<% if wiki.users.count > 0 %>
+<h2>Collaborations</h2>
+<%= render partial: "collaborator", collection: wiki.collaborations, locals: {wiki: wiki} %>
+<% end %>

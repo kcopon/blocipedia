@@ -1,0 +1,6 @@
+<p>
+  <%= form_for [wiki, collaborator], method: :delete do |f| %>
+  <%= collaborator.user.email %>
+  <%= f.submit 'Remove' %>
+  <% end %>
+</p>
